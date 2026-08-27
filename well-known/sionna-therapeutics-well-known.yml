@@ -1,0 +1,48 @@
+generated: '2026-08-27'
+method: probed
+source: live GET of the /.well-known/ discovery surface on every host named in apis.yml
+hit_count: 0
+note: >-
+  Every /.well-known/ path probed on the company's only reachable host returned HTTP 404, so no
+  WellKnown or SecurityTxt pointer is emitted — this file records a measured absence, not a served
+  surface. The host is NOT a soft-404 catch-all: a control probe of a nonsense path
+  (/this-path-should-not-exist-12345) returned 404 with the same 50,396-byte WordPress error page,
+  and /.well-known/security.txt returned a distinct 548-byte nginx 404, so the negatives above are
+  genuine. The second host in apis.yml, investors.sionnatx.com (a hosted Q4/gcs-web investor-relations
+  portal fronted by Akamai), could not be probed at all: it reset the HTTP/2 stream
+  (curl 92 INTERNAL_ERROR) and then timed out on HTTP/1.1, so its /.well-known/ surface is unknown
+  rather than absent.
+hosts:
+- host: https://www.sionnatx.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: https://investors.sionnatx.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    file: null
+    note: no response — Akamai edge reset the connection for a non-browser client
+soft_404_control:
+  url: https://www.sionnatx.com/this-path-should-not-exist-12345
+  status: 404
+  bytes: 50396
