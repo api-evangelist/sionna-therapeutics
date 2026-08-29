@@ -13,6 +13,17 @@ description: 'Sionna Therapeutics, Inc. (Nasdaq: SION) is a clinical-stage bioph
   material, plus a hosted investor-relations portal. It publishes no developer program, public API,
   SDK, webhook surface, or machine-readable specification of any kind.'
 url: https://raw.githubusercontent.com/api-evangelist/sionna-therapeutics/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.sionnatx.com/wp-content/uploads/share_news-from-sionna.jpg
 x-type: company
 x-source: harvest:secondary-market
